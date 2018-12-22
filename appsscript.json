@@ -1,0 +1,15 @@
+{
+  "timeZone": "Asia/Tokyo",
+  "dependencies": {
+    "libraries": [{
+      "userSymbol": "ChatWorkClientEx",
+      "libraryId": "12uCtMZB86abFVA2EYHH2JQdQe-xek6P2Ic0HUdFQdwI5_shj-6C7rnT_",
+      "version": "1"
+    }]
+  },
+  "webapp": {
+    "access": "ANYONE_ANONYMOUS",
+    "executeAs": "USER_DEPLOYING"
+  },
+  "exceptionLogging": "STACKDRIVER"
+}
