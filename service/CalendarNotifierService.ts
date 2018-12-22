@@ -8,6 +8,7 @@ class CalenderNotifierService {
      * Chatwork API クライアント
      */
     private chatwork_client: Object;
+    private notify_room_id: number;
 
     /**
      * Chatworkに通知するカレンダー
@@ -18,9 +19,10 @@ class CalenderNotifierService {
      * コンストラクタ
      * @param chatwork_client 
      */
-    constructor(calendar: GoogleAppsScript.Calendar.Calendar, chatwork_client: Object) {
+    constructor(calendar: GoogleAppsScript.Calendar.Calendar, chatwork_client: Object, notify_room_id: number) {
         this.calendar = calendar;
         this.chatwork_client = chatwork_client;
+        this.notify_room_id = notify_room_id;
     }
 
     /**
@@ -38,12 +40,10 @@ class CalenderNotifierService {
         const message: string = this.createPostMessage(events);
 
         if (message) {
-            // 通知する room_id
-            const notify_room_id: string = PropertiesService.getScriptProperties().getProperty('NOTIFY_ROOM_ID');
             this.chatwork_client.sendMessage(
                 {
                     'self_unread': 1,
-                    'room_id': notify_room_id,
+                    'room_id': this.notify_room_id,
                     'body': Utilities.formatString('(*) 本日のイベント\n%s', message),
                 }
             );

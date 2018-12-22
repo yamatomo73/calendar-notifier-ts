@@ -25,8 +25,14 @@ function doGet(e: any) {
  * 今日の予定をChatworkに通知する
  */
 function notify_today(): void {
-  const service: CalenderNotifierService = new CalenderNotifierService(getCalendar(), _getChatworkClient());
-  service.notify_today();
+  const notifier_service: CalenderNotifierService = new CalenderNotifierService(
+    getCalendar(),
+    _getChatworkClient(),
+    Number(PropertiesService.getScriptProperties().getProperty('NOTIFY_ROOM_ID')));
+  notifier_service.notify_today();
+
+  const update_service: UpdateLeaveCalenderService = new UpdateLeaveCalenderService(getCalendar());
+  update_service.updateScheduledToLeave(new Date());
 }
 
 /**
